@@ -6,12 +6,6 @@ add_sign = '+'
 alphabetic = set(string.ascii_letters)
 
 
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
 def build_new_words_dict(learned_dictionary_fn, subtitle_fn):
     learned_dictionary_fn = load_dictionary(learned_dictionary_fn)
     print(f'Dictionary size is {len(learned_dictionary_fn)}')
@@ -47,7 +41,7 @@ def backup(learned_dictionary):
 
 def load_uniq_words_from_subtitles_srt(subtitle_fn):
     f = open("%s" % subtitle_fn, 'r')
-    sbtl_uniq_words = set()
+    uniq_words = set()
     replica_numbers = 0
     while True:
         line = f.readline()
@@ -66,15 +60,14 @@ def load_uniq_words_from_subtitles_srt(subtitle_fn):
         for lexeme in line_lexemes:
             word = clean_up(lexeme)
             if word:
-                sbtl_uniq_words.add(word)
-
+                uniq_words.add(word.lower())
     f.close()
 
     print("Total number of replicas in the subtitle file is {}".format(replica_numbers))
-    print(f'Subtitles\' uniq words count is {len(sbtl_uniq_words)}')
-    print("Subtitles\' elements: {}".format(sbtl_uniq_words))
+    print(f'Subtitles\' uniq words count is {len(uniq_words)}')
+    print("Subtitles\' elements: {}".format(uniq_words))
 
-    return sbtl_uniq_words
+    return uniq_words
 
 
 def clean_up(lexeme):
@@ -126,7 +119,6 @@ def load_dictionary(learned_dictionary_fn):
     return dictionary
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # todo introduce commands
     cmd = "new_words"
@@ -142,5 +134,3 @@ if __name__ == '__main__':
     else:
         updated_dictionary = update_learned_dictionary(target_dictionary_fn, new_words_fn)
         save_dictionary(updated_dictionary, target_dictionary_fn)
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
