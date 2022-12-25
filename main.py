@@ -2,6 +2,7 @@ from sortedcontainers import SortedDict
 from shutil import *
 import string
 
+add_sign = '+'
 alphabetic = set(string.ascii_letters)
 
 
@@ -11,21 +12,40 @@ alphabetic = set(string.ascii_letters)
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
+def get_new_words(sbtl_name, learned_dictionary):
+    learned_dictionary = load_dictionary(learned_dictionary)
+    print(f'Dictionary size is {len(learned_dictionary)}')
+    print("Dictionary's elements: {}".format(learned_dictionary))
+
+    loaded_uniq_words = load_uniq_words_from_subtitles_srt(sbtl_name)
+    uniq_words_to_learn = loaded_uniq_words.difference(learned_dictionary)
+    save_dictionary(uniq_words_to_learn, "new_words_from_{}.txt".format(sbtl_name))
+
+
+def update_learned_dictionary(learned_dictionary_filename, learning_words_filename):
+    # todo test this method
+    backup(learned_dictionary_filename)
+
+    learned_dictionary = load_dictionary(learned_dictionary_filename)
+    print(f'Dictionary size is {len(learned_dictionary)}')
+    print("Dictionary's elements: {}".format(learned_dictionary))
+
+    learning_words = load_dictionary(learning_words_filename)
+    new_words = extract_new_words(learning_words)
+    learned_dictionary.update(new_words)
+    save_dictionary(learned_dictionary, learned_dictionary_filename)
+
+
+def extract_new_words(learning_words):
+    new_words = set()
+    for word in learning_words:
+        if word.strip().startswith(add_sign):
+            new_words.add(word.removeprefix(add_sign))
+    return new_words
+
+
 def backup(learned_dictionary):
     copyfile(learned_dictionary, "{}_backup".format(learned_dictionary))
-    pass
-
-
-def execute(sbtl_name, learned_dictionary):
-    backup(learned_dictionary)
-
-    dictionary = load_dictionary(learned_dictionary)
-    print(f'Dictionary size is {len(dictionary)}')
-    print("Dictionary's elements: {}".format(dictionary))
-
-    uniq_words = load_uniq_words_from_subtitles_srt(sbtl_name)
-    dictionary.update(uniq_words)
-    save_dictionary(dictionary, learned_dictionary)
 
 
 def load_uniq_words_from_subtitles_srt(subtitle_filename):
@@ -86,7 +106,7 @@ def save_dictionary(dictionary, dictionary_filename):
     for word in dictionary:
         sorted_dictionary[word] = word
 
-    f = open("{}_updated".format(dictionary_filename), 'w')
+    f = open(dictionary_filename, 'w')
     for word in sorted_dictionary:
         striped = word.strip()
         if not striped:
@@ -111,6 +131,6 @@ def load_dictionary(learned_dictionary):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    execute("Rio.DVDRip.XviD-ZMG.srt", "dictionary.txt")
+    get_new_words("Rio.DVDRip.XviD-ZMG.srt", "dictionary.txt")
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
