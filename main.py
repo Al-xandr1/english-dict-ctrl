@@ -12,28 +12,25 @@ alphabetic = set(string.ascii_letters)
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 
-def get_new_words(sbtl_name, learned_dictionary):
-    learned_dictionary = load_dictionary(learned_dictionary)
+def build_new_words_dict(learned_dictionary_fn, subtitle_fn):
+    learned_dictionary_fn = load_dictionary(learned_dictionary_fn)
+    print(f'Dictionary size is {len(learned_dictionary_fn)}')
+    print("Dictionary's elements: {}".format(learned_dictionary_fn))
+
+    loaded_uniq_words = load_uniq_words_from_subtitles_srt(subtitle_fn)
+    return loaded_uniq_words.difference(learned_dictionary_fn)
+
+
+def update_learned_dictionary(learned_dictionary_fn, learning_words_fn):
+    backup(learned_dictionary_fn)
+
+    learned_dictionary = load_dictionary(learned_dictionary_fn)
     print(f'Dictionary size is {len(learned_dictionary)}')
     print("Dictionary's elements: {}".format(learned_dictionary))
 
-    loaded_uniq_words = load_uniq_words_from_subtitles_srt(sbtl_name)
-    uniq_words_to_learn = loaded_uniq_words.difference(learned_dictionary)
-    save_dictionary(uniq_words_to_learn, "new_words_from_{}.txt".format(sbtl_name))
-
-
-def update_learned_dictionary(learned_dictionary_filename, learning_words_filename):
-    # todo test this method
-    backup(learned_dictionary_filename)
-
-    learned_dictionary = load_dictionary(learned_dictionary_filename)
-    print(f'Dictionary size is {len(learned_dictionary)}')
-    print("Dictionary's elements: {}".format(learned_dictionary))
-
-    learning_words = load_dictionary(learning_words_filename)
+    learning_words = load_dictionary(learning_words_fn)
     new_words = extract_new_words(learning_words)
-    learned_dictionary.update(new_words)
-    save_dictionary(learned_dictionary, learned_dictionary_filename)
+    return learned_dictionary.union(new_words)
 
 
 def extract_new_words(learning_words):
@@ -48,8 +45,8 @@ def backup(learned_dictionary):
     copyfile(learned_dictionary, "{}_backup".format(learned_dictionary))
 
 
-def load_uniq_words_from_subtitles_srt(subtitle_filename):
-    f = open("%s" % subtitle_filename, 'r')
+def load_uniq_words_from_subtitles_srt(subtitle_fn):
+    f = open("%s" % subtitle_fn, 'r')
     sbtl_uniq_words = set()
     replica_numbers = 0
     while True:
@@ -101,12 +98,12 @@ def find_last_alphabetic(lexeme):
     return len(lexeme) - first_index - 1
 
 
-def save_dictionary(dictionary, dictionary_filename):
+def save_dictionary(dictionary, dictionary_fn):
     sorted_dictionary = SortedDict()
     for word in dictionary:
         sorted_dictionary[word] = word
 
-    f = open(dictionary_filename, 'w')
+    f = open(dictionary_fn, 'w')
     for word in sorted_dictionary:
         striped = word.strip()
         if not striped:
@@ -115,8 +112,8 @@ def save_dictionary(dictionary, dictionary_filename):
     f.close()
 
 
-def load_dictionary(learned_dictionary):
-    dictionary_file = open(learned_dictionary, 'r')
+def load_dictionary(learned_dictionary_fn):
+    dictionary_file = open(learned_dictionary_fn, 'r')
     dictionary = set()
     while True:
         word = dictionary_file.readline()
@@ -131,6 +128,19 @@ def load_dictionary(learned_dictionary):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    get_new_words("Rio.DVDRip.XviD-ZMG.srt", "dictionary.txt")
+    # todo introduce commands
+    cmd = "new_words"
+    # cmd = "update_dict"
+
+    target_dictionary_fn = "dictionary.txt"
+    new_words_source_fn = "Rio.DVDRip.XviD-ZMG.srt"
+    new_words_fn = "new_words_from_{}.txt".format(new_words_source_fn)
+
+    if cmd == "new_words":
+        uniq_words_to_learn = build_new_words_dict(target_dictionary_fn, new_words_source_fn)
+        save_dictionary(uniq_words_to_learn, new_words_fn)
+    else:
+        updated_dictionary = update_learned_dictionary(target_dictionary_fn, new_words_fn)
+        save_dictionary(updated_dictionary, target_dictionary_fn)
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
