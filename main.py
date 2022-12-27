@@ -6,7 +6,7 @@ add_sign = '+'
 
 def build_new_words_dict(learned_dictionary_fn, subtitle_fn):
     learned_dictionary = load_dictionary(learned_dictionary_fn)
-    print(f'Dictionary size is {len(learned_dictionary)}')
+    print(f'First loaded dictionary size is {len(learned_dictionary)}')
     # print("Dictionary's elements: {}".format(learned_dictionary))
 
     loaded_uniq_words = load_uniq_words_from_subtitles_srt(subtitle_fn)
@@ -17,7 +17,7 @@ def update_learned_dictionary(learned_dictionary_fn, learning_words_fn):
     backup(learned_dictionary_fn)
 
     learned_dictionary = load_dictionary(learned_dictionary_fn)
-    print(f'Dictionary size is {len(learned_dictionary)}')
+    print(f'First loaded dictionary size is {len(learned_dictionary)}')
     # print("Dictionary's elements: {}".format(learned_dictionary))
 
     learning_words = load_dictionary(learning_words_fn)
