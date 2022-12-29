@@ -1,263 +1,294 @@
-a
-aah
-act
-action
-actually
-adventure
-advice
-after
-again
-age
-ah
-ahh
-air
-airport
-alive
-all
-almost
-alone
-already
-alright
-always
-american
-amigo
-amigos
-an
-and
-angel
-angles
-animal
-another
-answer
-any
-anybody
-anyone
-anything
-anyway
-anywhere
-ara-ara
-are
-arghhh
-argument
-around
-arrive
-ask
-at
-attack
-attacked
-baby
-back
-bad
-ball
-balls
-barbos
-barbosa
-bars
-bath
-be
-beautiful
-beauty
-because
-been
-before
-behind
-being
-believe
-bell
-belong
-best
-better
-big
-biggest
-bike
-life
-right
-rio
-room
-running
-samba
-same
-save
-saved
-saw
-say
-says
-scary
-schedule
-school
-searching
-second
-seconds
-see
-seem
-seems
-seen
-shall
-she
-she'll
-she's
-sleep
-sleepy
-snow
-song
-soon
-sorry
-sort
-sound
-sounds
-speak
-standard
-standing
-star
-stars
-start
-starting
-stay
-step
-stick
-still
-stop
-stopping
-streets
-stuff
-stupid
-suggesting
-switch
-tail
-take
-taking
-talk
-talking
-tall
-ten
-tested
-than
-thank
-thanks
-that
-that's
-thats
-the
-their
-them
-then
-there
-there's
-these
-they
-they're
-thing
-thing's
-things
-think
-thinking
-this
-those
-thousand
-three
-three's
-threw
-throw
-thrown
-thrust
-time
-times
-to
-today
-together
-told
-tomorrow
-tonight
-too
-took
-total
-tourist
-town
-traded
-travel
-trees
-truck
-trust
-trusted
-try
-trying
-turn
-tv
-understand
-unfortunately
-until
-up
-us
-used
-very
-view
-visit
-vitamins
-wait
-walk
-walking
-walks
-want
-wanted
-wanting
-wants
-warm
-was
-wasn't
-watch
-watching
-way
-we
-we'll
-we're
-we've
-welcome
-well
-went
-were
-what
-what's
-when
-where
-while
-white
-who
-who'll
-who's
-whole
-whose
-why
-wild
-will
-win
-wind
-wish
-witch
-with
-without
-women
-won't
-word
-work
-works
-world
-worry
-would
-wouldn't
-wow
-wrong
-ya
-yah
-yayaya
-yeah
-year
-years
-yes
-you
-you'll
-you're
-you've
-young
-your
-yours
-yourself
+a		->	a
+aah		->	haa
+act		->	tca
+action		->	noitca
+actually		->	yllautca
+adventure		->	erutnevda
+advice		->	ecivda
+after		->	retfa
+again		->	niaga
+age		->	ega
+ah		->	ha
+ahh		->	hha
+air		->	ria
+airport		->	tropria
+alive		->	evila
+all		->	lla
+almost		->	tsomla
+alone		->	enola
+already		->	ydaerla
+alright		->	thgirla
+always		->	syawla
+american		->	nacirema
+amigo		->	ogima
+amigos		->	sogima
+an		->	na
+and		->	dna
+angel		->	legna
+angles		->	selgna
+animal		->	lamina
+another		->	rehtona
+answer		->	rewsna
+any		->	yna
+anybody		->	ydobyna
+anyone		->	enoyna
+anything		->	gnihtyna
+anyway		->	yawyna
+anywhere		->	erehwyna
+ara-ara		->	ara-ara
+are		->	era
+arghhh		->	hhhgra
+argument		->	tnemugra
+around		->	dnuora
+arrive		->	evirra
+ask		->	ksa
+at		->	ta
+attack		->	kcatta
+attacked		->	dekcatta
+baby		->	ybab
+back		->	kcab
+bad		->	dab
+ball		->	llab
+balls		->	sllab
+barbos		->	sobrab
+barbosa		->	asobrab
+bars		->	srab
+bath		->	htab
+be		->	eb
+beak		->	kaeb
+beautiful		->	lufituaeb
+beauty		->	ytuaeb
+because		->	esuaceb
+been		->	neeb
+before		->	erofeb
+behind		->	dniheb
+being		->	gnieb
+believe		->	eveileb
+bell		->	lleb
+belong		->	gnoleb
+best		->	tseb
+better		->	retteb
+big		->	gib
+biggest		->	tseggib
+bike		->	ekib
+bird		->	drib
+bird's		->	s'drib
+birdie		->	eidrib
+birdie-birdie		->	eidrib-eidrib
+birds		->	sdrib
+blu		->	ulb
+blu's		->	s'ulb
+blue		->	eulb
+bobo		->	obob
+body		->	ydob
+book		->	koob
+books		->	skoob
+boss		->	ssob
+both		->	htob
+boy		->	yob
+boys		->	syob
+brave		->	evarb
+break		->	kaerb
+bring		->	gnirb
+bro		->	orb
+broken		->	nekorb
+brother		->	rehtorb
+buddy		->	yddub
+bus		->	sub
+business		->	ssenisub
+busy		->	ysub
+but		->	tub
+butt		->	ttub
+by		->	yb
+bye		->	eyb
+life		->	efil
+right		->	thgir
+rio		->	oir
+room		->	moor
+running		->	gninnur
+samba		->	abmas
+same		->	emas
+save		->	evas
+saved		->	devas
+saw		->	was
+say		->	yas
+says		->	syas
+scary		->	yracs
+schedule		->	eludehcs
+school		->	loohcs
+searching		->	gnihcraes
+second		->	dnoces
+seconds		->	sdnoces
+see		->	ees
+seem		->	mees
+seems		->	smees
+seen		->	nees
+shall		->	llahs
+she		->	ehs
+she'll		->	ll'ehs
+she's		->	s'ehs
+sleep		->	peels
+sleepy		->	ypeels
+snow		->	wons
+song		->	gnos
+soon		->	noos
+sorry		->	yrros
+sort		->	tros
+sound		->	dnuos
+sounds		->	sdnuos
+speak		->	kaeps
+standard		->	dradnats
+standing		->	gnidnats
+star		->	rats
+stars		->	srats
+start		->	trats
+starting		->	gnitrats
+stay		->	yats
+step		->	pets
+stick		->	kcits
+still		->	llits
+stop		->	pots
+stopping		->	gnippots
+streets		->	steerts
+stuff		->	ffuts
+stupid		->	diputs
+suggesting		->	gnitseggus
+switch		->	hctiws
+tail		->	liat
+take		->	ekat
+taking		->	gnikat
+talk		->	klat
+talking		->	gniklat
+tall		->	llat
+ten		->	net
+tested		->	detset
+than		->	naht
+thank		->	knaht
+thanks		->	sknaht
+that		->	taht
+that's		->	s'taht
+thats		->	staht
+the		->	eht
+their		->	rieht
+them		->	meht
+then		->	neht
+there		->	ereht
+there's		->	s'ereht
+these		->	eseht
+they		->	yeht
+they're		->	er'yeht
+thing		->	gniht
+thing's		->	s'gniht
+things		->	sgniht
+think		->	kniht
+thinking		->	gnikniht
+this		->	siht
+those		->	esoht
+thousand		->	dnasuoht
+three		->	eerht
+three's		->	s'eerht
+threw		->	werht
+throw		->	worht
+thrown		->	nworht
+thrust		->	tsurht
+time		->	emit
+times		->	semit
+to		->	ot
+today		->	yadot
+together		->	rehtegot
+told		->	dlot
+tomorrow		->	worromot
+tonight		->	thginot
+too		->	oot
+took		->	koot
+total		->	latot
+tourist		->	tsiruot
+town		->	nwot
+traded		->	dedart
+travel		->	levart
+trees		->	seert
+truck		->	kcurt
+trust		->	tsurt
+trusted		->	detsurt
+try		->	yrt
+trying		->	gniyrt
+turn		->	nrut
+tv		->	vt
+understand		->	dnatsrednu
+unfortunately		->	yletanutrofnu
+until		->	litnu
+up		->	pu
+us		->	su
+used		->	desu
+very		->	yrev
+view		->	weiv
+visit		->	tisiv
+vitamins		->	snimativ
+wait		->	tiaw
+walk		->	klaw
+walking		->	gniklaw
+walks		->	sklaw
+want		->	tnaw
+wanted		->	detnaw
+wanting		->	gnitnaw
+wants		->	stnaw
+warm		->	mraw
+was		->	saw
+wasn't		->	t'nsaw
+watch		->	hctaw
+watching		->	gnihctaw
+way		->	yaw
+we		->	ew
+we'll		->	ll'ew
+we're		->	er'ew
+we've		->	ev'ew
+welcome		->	emoclew
+well		->	llew
+went		->	tnew
+were		->	erew
+what		->	tahw
+what's		->	s'tahw
+when		->	nehw
+where		->	erehw
+while		->	elihw
+white		->	etihw
+who		->	ohw
+who'll		->	ll'ohw
+who's		->	s'ohw
+whole		->	elohw
+whose		->	esohw
+why		->	yhw
+wild		->	dliw
+will		->	lliw
+win		->	niw
+wind		->	dniw
+wish		->	hsiw
+witch		->	hctiw
+with		->	htiw
+without		->	tuohtiw
+women		->	nemow
+won't		->	t'now
+word		->	drow
+work		->	krow
+works		->	skrow
+world		->	dlrow
+worry		->	yrrow
+would		->	dluow
+wouldn't		->	t'ndluow
+wow		->	wow
+wrong		->	gnorw
+ya		->	ay
+yah		->	hay
+yayaya		->	ayayay
+yeah		->	haey
+year		->	raey
+years		->	sraey
+yes		->	sey
+you		->	uoy
+you'll		->	ll'uoy
+you're		->	er'uoy
+you've		->	ev'uoy
+young		->	gnuoy
+your		->	ruoy
+yours		->	sruoy
+yourself		->	flesruoy
