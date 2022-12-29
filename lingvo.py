@@ -1,30 +1,49 @@
 import requests
 
-from dictionary import dict_format, load_dictionary
+from dictionary import DICT_FORMAT, load_dictionary
+
+LINGVO_SITE_URL = "https://www.lingvolive.com/en-us/translate/en-ru/{}"
+
+LINGVO_BASE_URL = "https://developers.lingvolive.com"
+API_KEY = "MmY3Mzg5ODYtNWI1ZC00YmM4LWFjNDMtNTNhOGRhMmE5YzcwOjRiOTUyMzgxYTJiNDRlNmZhMGQyMTA0NTcwOWM1Y2Ez"
+
+LINGVO_AUTH = LINGVO_BASE_URL + "/api/v1.1/authenticate"
+LINGVO_TRANSLATION = LINGVO_BASE_URL + "/api/v1/Translation?text={}&srcLang=1033&dstLang=1049"
 
 
 def translate_words(words_set):
     """:returns build dict container of translated words"""
+
+    token = authorize()
     translated_words = dict()
     for word in words_set:
-        translation_card = translate(word)
-        print(dict_format.format(word, translation_card))
+        translation_card = translate(word, token)
+        print(DICT_FORMAT.format(word, translation_card))
         translated_words[word] = translation_card
     return translated_words
 
 
 def translate_dict(dictionary_fn):
     dictionary = load_dictionary(dictionary_fn)
+    token = authorize()
     for word, old_translation_card in dictionary.items():
-        translation_card = translate(word)
-        print(dict_format.format(word, translation_card))
+        translation_card = translate(word, token)
+        print(DICT_FORMAT.format(word, translation_card))
         dictionary[word] = translation_card
     return dictionary
 
 
-def translate(english_word):
-    # api_url = "https://jsonplaceholder.typicode.com/todos/1"
-    # response = requests.get(api_url)
-    # json = response.json()
-    # print(f'Received json: {json}')
-    return english_word[::-1]
+def translate(english_word, token):
+    # response = requests.get(LINGVO_TRANSLATION.format(english_word), headers={"Authorization": f'Bearer {token}'})
+    # todo make json parsing
+    # translation_card = response.json()
+    # print(f'Received json: {translation_card}')
+
+    return LINGVO_SITE_URL.format(english_word)
+
+
+def authorize():
+    response = requests.post(LINGVO_AUTH, headers={"Authorization": f'Basic {API_KEY}'})
+    bearer = response.text
+    print(f'Bearer token: {bearer}')
+    return bearer

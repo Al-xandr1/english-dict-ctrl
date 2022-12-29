@@ -1,5 +1,5 @@
 from dictionary import save_dictionary, load_dictionary, backup, extract_new_words_set
-from lingvo import translate_words, translate_dict
+from lingvo import translate_words, translate_dict, translate
 from subtitles import load_uniq_words_from_subtitles_srt
 
 

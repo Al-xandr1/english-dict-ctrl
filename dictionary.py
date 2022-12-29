@@ -2,9 +2,9 @@ from shutil import copyfile
 
 from sortedcontainers import SortedDict
 
-add_sign = '+'
-dict_separator = "->"
-dict_format = "{}\t\t" + dict_separator + "\t{}\n"
+ADD_SIGN = '+'
+DICT_SEPARATOR = "->"
+DICT_FORMAT = "{}\t\t" + DICT_SEPARATOR + "\t{}\n"
 
 
 def save_dictionary(dictionary, dictionary_fn):
@@ -17,7 +17,7 @@ def save_dictionary(dictionary, dictionary_fn):
             striped = word.strip()
             if not striped:
                 continue
-            f.write(dict_format.format(striped, translate_card))
+            f.write(DICT_FORMAT.format(striped, translate_card))
 
 
 def load_dictionary(learned_dictionary_fn):
@@ -27,7 +27,7 @@ def load_dictionary(learned_dictionary_fn):
             line = f.readline()
             if not line:
                 break
-            dict_entry = line.split(sep=dict_separator)
+            dict_entry = line.split(sep=DICT_SEPARATOR)
             word = dict_entry[0].strip()
             translation_card = dict_entry[1] if len(dict_entry) > 1 else ""
             if word:
@@ -42,6 +42,6 @@ def backup(learned_dictionary):
 def extract_new_words_set(learning_words_set):
     new_words = set()
     for word in learning_words_set:
-        if word.strip().startswith(add_sign):
-            new_words.add(word.removeprefix(add_sign))
+        if word.strip().startswith(ADD_SIGN):
+            new_words.add(word.removeprefix(ADD_SIGN))
     return new_words
