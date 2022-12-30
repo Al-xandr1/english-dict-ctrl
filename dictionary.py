@@ -4,7 +4,18 @@ from sortedcontainers import SortedDict
 
 ADD_SIGN = '+'
 DICT_SEPARATOR = "->"
-DICT_FORMAT = "{}\t\t" + DICT_SEPARATOR + "\t{}\n"
+DICT_FORMAT = "{}  " + DICT_SEPARATOR + "  {}\n"
+
+DICTIONARY_HTML_HEADER = "<!DOCTYPE html>\n\
+<html lang=\"en\" xmlns=\"http://www.w3.org/1999/html\">\n\
+<head>\n\
+    <meta charset=\"UTF-8\">\n\
+    <title>Dictionary</title>\n\
+</head>\n\
+<body>\n"
+
+DICTIONARY_HTML_FOOTER = "</body>\n\
+</html>\n"
 
 
 def save_dictionary(dictionary, dictionary_fn):
@@ -13,11 +24,13 @@ def save_dictionary(dictionary, dictionary_fn):
         sorted_dictionary[word] = translate_card
 
     with open(dictionary_fn, 'w') as f:
+        f.write(DICTIONARY_HTML_HEADER)
         for word, translate_card in sorted_dictionary.items():
             striped = word.strip()
             if not striped:
                 continue
             f.write(DICT_FORMAT.format(striped, translate_card))
+        f.write(DICTIONARY_HTML_FOOTER)
 
 
 def load_dictionary(learned_dictionary_fn):
@@ -27,11 +40,16 @@ def load_dictionary(learned_dictionary_fn):
             line = f.readline()
             if not line:
                 break
+
+            if line.strip().startswith("<"):
+                continue
+
             dict_entry = line.split(sep=DICT_SEPARATOR)
             word = dict_entry[0].strip()
             translation_card = dict_entry[1] if len(dict_entry) > 1 else ""
             if word:
                 dictionary[word] = translation_card.strip()
+
     return dictionary
 
 

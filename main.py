@@ -1,5 +1,5 @@
 from dictionary import save_dictionary, load_dictionary, backup, extract_new_words_set
-from lingvo import translate_words, translate_dict, translate
+from lingvo import translate_words, translate_dict, build_translation_card
 from subtitles import load_uniq_words_from_subtitles_srt
 
 
@@ -33,10 +33,10 @@ if __name__ == '__main__':
     # cmd = "update_dict"
     # cmd = "translate_dict"
 
-    dictionary_fn = "dictionary\\dictionary.txt"
+    dictionary_fn = "dictionary\\dictionary.html"
     source_fn = "sources\\Rio.DVDRip.XviD-ZMG.srt"
 
-    new_words_fn = "dictionary\\new_words_from_{}.txt".format(source_fn.split(sep="\\")[-1])
+    new_words_fn = "dictionary\\new_words_from_{}.html".format(source_fn.split(sep="\\")[-1])
 
     if cmd == "new_words":
         new_words_to_learn = build_new_words_set(dictionary_fn, source_fn)
