@@ -29,9 +29,9 @@ def update_learned_dictionary(learned_dictionary_fn, learning_words_fn):
 
 if __name__ == '__main__':
     # todo introduce commands
-    # cmd = "new_words"
+    cmd = "new_words"
     # cmd = "update_dict"
-    cmd = "translate_dict"
+    # cmd = "translate_dict"
 
     dictionary_fn = "dictionary\\dictionary.html"
     source_fn = "sources\\Rio.DVDRip.XviD-ZMG.srt"
