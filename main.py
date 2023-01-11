@@ -1,5 +1,5 @@
 from dictionary import save_dictionary, load_dictionary, backup, extract_new_words_set
-from lingvo import translate_words, translate_dict, build_translation_card
+from lingvo import translate_words, translate_dict, build_translation_card, authorize, get_translation
 from subtitles import load_uniq_words_from_subtitles_srt
 
 
@@ -29,9 +29,9 @@ def update_learned_dictionary(learned_dictionary_fn, learning_words_fn):
 
 if __name__ == '__main__':
     # todo introduce commands
-    cmd = "new_words"
+    # cmd = "new_words"
     # cmd = "update_dict"
-    # cmd = "translate_dict"
+    cmd = "translate_dict"
 
     dictionary_fn = "dictionary\\dictionary.html"
     source_fn = "sources\\Rio.DVDRip.XviD-ZMG.srt"
@@ -50,4 +50,10 @@ if __name__ == '__main__':
     elif cmd == "translate_dict":
         translated_dictionary = translate_dict(dictionary_fn)
         save_dictionary(translated_dictionary, dictionary_fn)
+
+        # TODO for test only. Remove
+        # token = authorize()
+        # word = "murder"
+        # translation_card = build_translation_card(word, token)
+        # print(f'{word} -> {translation_card}')
         pass
