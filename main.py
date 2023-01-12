@@ -51,7 +51,7 @@ if __name__ == '__main__':
         translated_dictionary = translate_dict(dictionary_fn)
         save_dictionary(translated_dictionary, dictionary_fn)
 
-        # TODO for test only. Remove
+        # FOR TEST ONLY
         # token = authorize()
         # word = "murder"
         # translation_card = build_translation_card(word, token)

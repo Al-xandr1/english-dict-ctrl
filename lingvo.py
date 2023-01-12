@@ -41,66 +41,117 @@ def build_translation_card(english_word, token):
 
     return TRANSLATION_CARD_PATTER.format(
         LINGVO_SITE_URL.format(english_word),
-        english_word  # todo get_translation(translation_card_json)
+        get_translation(translation_card_json)
     )
 
 
-UNIVERSAL_DICTIONARY = 'LingvoUniversal (En-Ru)'
-BODY = "Body"
-ITEMS = "Items"
-MARKUP = "Markup"
-TEXT = "Text"
+UNIVERSAL_DICTIONARY_KEY = 'LingvoUniversal (En-Ru)'
+BODY_KEY = "Body"
+ITEMS_KEY = "Items"
+MARKUP_KEY = "Markup"
+TEXT_KEY = "Text"
+NODE_KEY = "Node"
+SPECIAL_CHARS = {'/', '\\', '-', ',', '.', ';', '\'', '-', '—', '(', ')', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
+FATAL_CHARS = {'↑'}
 
 
 def get_translation(translation_card_json):
-    """TODO make recursive traversing of JSON with capture all TEXT nodes """
+    result = list()
 
-    universal_card = find_element(translation_card_json, "Dictionary", UNIVERSAL_DICTIONARY)
-    top_level_body = universal_card[BODY]
-    type_2_obj = find_element(top_level_body, "Type", 2)
+    process_stack = list()
+    for card in translation_card_json[::-1]:
+        process_stack.append(card)
 
-    # list of translations
-    translations_list_json = type_2_obj[ITEMS]
-    translations = list()
-    for translation_variant in translations_list_json:
-        translations.append(extract_translation(translation_variant))
+    element = process_stack.pop()
+    while element is not None:
+        if NODE_KEY in element and element[NODE_KEY] == "Text":
+            result.append(element)
+
+        append_children(BODY_KEY, element, process_stack)
+        append_children(MARKUP_KEY, element, process_stack)
+        append_children(ITEMS_KEY, element, process_stack)
+        element = process_stack.pop() if len(process_stack) > 0 else None
+
+    translations = filter_out(result)
 
     return translations
 
 
-def find_element(elements, json_field_key, json_filed_value):
-    children = [x for x in elements if (json_field_key in x and x[json_field_key] == json_filed_value)]
-    if len(children) > 1:
-        print(f'There is find more than one child of {json_field_key}={json_filed_value}')
-    return children[0] if len(children) > 0 else None
+def filter_out(result):
+    translations = list()
+    for r in result:
+        stripped = r[TEXT_KEY].strip()
+
+        filtered = remove_start_special(stripped)
+        while filtered != stripped:
+            stripped = filtered
+            filtered = remove_start_special(stripped)
+
+        filtered = remove_end_special(stripped)
+        while filtered != stripped:
+            stripped = filtered
+            filtered = remove_end_special(stripped)
+
+        for fatal_char in FATAL_CHARS:
+            filtered = filtered.replace(fatal_char, '')
+
+        if len(filtered) > 0:
+            translations.append(filtered)
+    return translations
 
 
-def extract_translation(translation_variant_json):
-    translation = ""
-    try:
-        markup = translation_variant_json[MARKUP]
-        print(f'markup = {markup}')
-        type_3_obj = find_element(markup, "Type", 3)
-        if type_3_obj is None:
-            """This is short translation card variant"""
-            last = markup[-1]
-            mr = last[MARKUP]
-            text_node = find_element(mr, "Node", "Text")
-            node = text_node
-            text = node[TEXT]
-        else:
-            items = type_3_obj[ITEMS]
-            for item in items:
-                mr = item[MARKUP]
-                paragraph = find_element(mr, "Node", "Paragraph")
-                paragraph_markup = paragraph[MARKUP]
-                text_node = find_element(paragraph_markup, "Node", "Text")
-                text = text_node[TEXT]  # TODO it may be wrong word. It should process all elements in the current item
-                translation += f'{text}; '
-    except:
-        pass
+def remove_start_special(string):
+    if len(string) > 0 and string[0] in SPECIAL_CHARS:
+        string = string[1:len(string)].strip() if len(string) > 1 else ""
+    return string
 
-    return translation
+
+def remove_end_special(string):
+    if len(string) > 0 and string[-1] in SPECIAL_CHARS:
+        string = string[0:len(string) - 1].strip() if len(string) > 1 else ""
+    return string
+
+
+def append_children(key, element, process_stack):
+    if key in element:
+        children = element[key]
+        for child in children[::-1]:
+            process_stack.append(child)
+
+
+# def find_element(elements, json_field_key, json_filed_value):
+#     children = [x for x in elements if (json_field_key in x and x[json_field_key] == json_filed_value)]
+#     if len(children) > 1:
+#         print(f'There is find more than one child of {json_field_key}={json_filed_value}')
+#     return children[0] if len(children) > 0 else None
+#
+#
+# def extract_translation(translation_variant_json):
+#     translation = ""
+#     try:
+#         markup = translation_variant_json[MARKUP_KEY]
+#         print(f'markup = {markup}')
+#         type_3_obj = find_element(markup, "Type", 3)
+#         if type_3_obj is None:
+#             """This is short translation card variant"""
+#             last = markup[-1]
+#             mr = last[MARKUP_KEY]
+#             text_node = find_element(mr, "Node", "Text")
+#             node = text_node
+#             text = node[TEXT_KEY]
+#         else:
+#             items = type_3_obj[ITEMS_KEY]
+#             for item in items:
+#                 mr = item[MARKUP_KEY]
+#                 paragraph = find_element(mr, "Node", "Paragraph")
+#                 paragraph_markup = paragraph[MARKUP_KEY]
+#                 text_node = find_element(paragraph_markup, "Node", "Text")
+#                 text = text_node[TEXT_KEY]
+#                 translation += f'{text}; '
+#     except:
+#         pass
+#
+#     return translation
 
 
 def authorize():
